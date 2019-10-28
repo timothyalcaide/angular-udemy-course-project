@@ -16,7 +16,7 @@ export class RecipeService {
     ),
     new Recipe(
       'Biggy Fat burger',
-      'What else ?',
+      'What else ? Maybe some fried oignons ?',
       'https://picsum.photos/id/2/200',
       [new Ingredient('Meat', 1), new Ingredient('Buns', 2)]
     )
