@@ -5,7 +5,6 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
-import { formatNumber } from '@angular/common';
 
 @Component({
   selector: 'app-shopping-edit',
