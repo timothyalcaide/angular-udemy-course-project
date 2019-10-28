@@ -22,6 +22,11 @@ export class ShoppingListComponent implements OnInit {
     );
   }
 
+  onEditItem(index: number) {
+    this.slService.startedEditing.next(index);
+  }
+
+  // tslint:disable-next-line: use-lifecycle-interface
   ngOnDestroy(): void {
     this.igChangeSub.unsubscribe();
   }
