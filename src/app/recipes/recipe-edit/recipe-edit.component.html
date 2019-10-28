@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <form [formGroup]="recipeForm" (ngSubit)="onSubmit()">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-xs-12">
           <button
@@ -50,10 +50,7 @@
             <label for="description">Description</label>
             <span
               class="help-block danger"
-              *ngIf="
-                !recipeForm.get('description').valid ||
-                !recipeForm.get('description').touched
-              "
+              *ngIf="!recipeForm.get('description').valid"
               >The description need to have more than 15 characters</span
             >
             <textarea
