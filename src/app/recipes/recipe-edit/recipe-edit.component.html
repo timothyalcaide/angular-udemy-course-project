@@ -84,14 +84,24 @@
               />
             </div>
             <div class="col-xs-2">
-              <button class="btn btn-danger" (click)="">x</button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="onDeleteIngredient(i)"
+              >
+                x
+              </button>
             </div>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <button class="btn btn-success" (click)="onAddIngredient()">
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="onAddIngredient()"
+          >
             Add ingredient
           </button>
         </div>
