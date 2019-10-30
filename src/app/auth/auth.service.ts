@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-interface AuthResponseData {
+export interface AuthResponseData {
   kind: string;
   idToken: string;
   email: string;
   refreshToken: string;
   expiresIn: string;
   localId: string;
+  registered?: boolean; // only on loggin
 }
 
 @Injectable({
@@ -17,18 +18,19 @@ interface AuthResponseData {
 })
 export class AuthService {
   API_KEY = 'AIzaSyBlXtBN_hOSK_YFR32Y-f6s88JFgM27GJU';
-  API_URL =
-    'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' +
-    this.API_KEY;
   constructor(private http: HttpClient) {}
 
   signup(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(this.API_URL, {
-        email: email,
-        password: password,
-        returnSecureToken: true
-      })
+      .post<AuthResponseData>(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' +
+          this.API_KEY,
+        {
+          email: email,
+          password: password,
+          returnSecureToken: true
+        }
+      )
       .pipe(
         catchError(errorRes => {
           let errorMessage = 'An unknown error occured !';
@@ -42,5 +44,17 @@ export class AuthService {
           return throwError(errorMessage);
         })
       );
+  }
+
+  login(email: string, password: string) {
+    return this.http.post<AuthResponseData>(
+      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
+        this.API_KEY,
+      {
+        email: email,
+        password: password,
+        returnSecureToken: true
+      }
+    );
   }
 }
