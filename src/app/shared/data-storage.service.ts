@@ -9,12 +9,21 @@ import { RecipeService } from '../recipes/recipe.service';
 export class DataStorageService {
   URL_API = 'https://ng-course-recipe-book-tabmo.firebaseio.com/';
   constructor(private http: HttpClient, private recipeService: RecipeService) {}
+
   storeRecipes() {
     const recipes = this.recipeService.getRecipes();
     this.http
       .put(this.URL_API + 'recipes.json', recipes)
       .subscribe(response => {
         console.log(response);
+      });
+  }
+
+  fetchRecipes() {
+    this.http
+      .get<Recipe[]>(this.URL_API + 'recipes.json')
+      .subscribe(recipes => {
+        this.recipeService.setRecipes(recipes);
       });
   }
 }
